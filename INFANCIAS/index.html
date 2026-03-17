@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Lugar de las Infancias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #fdf6ee;
+      --terracotta: #c1694f;
+      --sage: #7a9e7e;
+      --gold: #d4a843;
+      --brown: #4a3728;
+      --light-sage: #e8f0e9;
+      --warm-gray: #8b7d72;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--brown);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 1.1rem 2rem;
+      background: rgba(253, 246, 238, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(193, 105, 79, 0.15);
+    }
+
+    nav a {
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav a:hover { color: var(--terracotta); }
+
+    /* ─── HERO ─── */
+    #inicio {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 20% 80%, rgba(122,158,126,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 20%, rgba(212,168,67,0.13) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(193,105,79,0.08) 0%, transparent 70%);
+    }
+
+    .hero-ornament {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--terracotta), transparent);
+      margin: 0 auto 2rem;
+      animation: fadeIn 1.2s ease both;
+    }
+
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+      opacity: 0;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.9s 0.4s ease both;
+      opacity: 0;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--warm-gray);
+      margin-top: 1.5rem;
+      letter-spacing: 0.04em;
+      animation: fadeUp 0.9s 0.6s ease both;
+      opacity: 0;
+    }
+
+    .hero-sub strong {
+      color: var(--brown);
+      font-weight: 700;
+    }
+
+    .hero-meta {
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--warm-gray);
+      letter-spacing: 0.08em;
+      animation: fadeUp 0.9s 0.75s ease both;
+      opacity: 0;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 3rem auto;
+      max-width: 320px;
+      animation: fadeIn 1.2s 1s ease both;
+      opacity: 0;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+
+    .divider-line.rev {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    .divider-diamond {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 5rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--brown);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    /* ─── VIDEO SECTION ─── */
+    #video {
+      background: var(--light-sage);
+      max-width: 100%;
+      padding: 5rem 2rem;
+    }
+
+    #video .inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .video-frame {
+      margin-top: 2rem;
+      background: var(--brown);
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(74,55,40,0.25);
+    }
+
+    .video-placeholder {
+      text-align: center;
+      color: var(--cream);
+    }
+
+    .video-placeholder svg {
+      width: 64px;
+      height: 64px;
+      fill: var(--gold);
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .video-placeholder p {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+
+    .video-placeholder em {
+      display: block;
+      font-style: normal;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+
+    /* This is where you embed your actual video */
+    #video-embed {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ─── CONCLUSIONES ─── */
+    #conclusiones {
+      border-top: 1px solid rgba(193,105,79,0.15);
+    }
+
+    .conclusion-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .conclusion-grid { grid-template-columns: 1fr; }
+    }
+
+    .conclusion-card {
+      background: white;
+      border-left: 3px solid var(--terracotta);
+      padding: 1.8rem;
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 2px 12px rgba(74,55,40,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .conclusion-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(74,55,40,0.12);
+    }
+
+    .conclusion-card:nth-child(2) { border-color: var(--sage); }
+    .conclusion-card:nth-child(3) { border-color: var(--gold); }
+    .conclusion-card:nth-child(4) { border-color: var(--brown); }
+
+    .conclusion-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: var(--brown);
+    }
+
+    .conclusion-card p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--warm-gray);
+    }
+
+    .conclusion-full {
+      margin-top: 2.5rem;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 4px;
+      box-shadow: 0 2px 12px rgba(74,55,40,0.06);
+    }
+
+    .conclusion-full p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--brown);
+      margin-bottom: 1.2rem;
+    }
+
+    .conclusion-full p:last-child { margin-bottom: 0; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 1px solid rgba(193,105,79,0.12);
+      font-size: 0.78rem;
+      color: var(--warm-gray);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Scroll fade-in */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#video">Línea de Tiempo</a>
+    <a href="#conclusiones">Conclusiones</a>
+  </nav>
+
+  <!-- HERO / PRESENTACIÓN -->
+  <section id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-ornament"></div>
+    <p class="hero-tag">Escenario 2 · Primera Infancia · Pedagogía</p>
+    <h1>El Lugar de las <em>Infancias</em></h1>
+    <p class="hero-sub"><strong>Daniela Fernanda Buelvas Sierra</strong></p>
+    <p class="hero-meta">Licenciatura en Pedagogía &nbsp;·&nbsp; 2026</p>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line rev"></div>
+    </div>
+
+    <p style="max-width:540px; line-height:1.85; color:var(--warm-gray); font-size:0.95rem; animation: fadeUp 0.9s 0.9s ease both; opacity:0;">
+      Este trabajo explora la evolución histórica de los conceptos de <em>niño, niña, niñez e infancia</em>, 
+      rastreando su transformación desde la Edad Antigua hasta la Modernidad, para deconstruir 
+      y resignificar el lugar que ocupan las infancias en nuestra sociedad.
+    </p>
+  </section>
+
+  <!-- VIDEO / LÍNEA DE TIEMPO -->
+  <div id="video">
+    <div class="inner reveal">
+      <p class="section-label">Actividad · Evidencia de Aprendizaje</p>
+      <h2 class="section-title">Línea de Tiempo:<br/>Evolución de los Conceptos</h2>
+      <p style="color:var(--warm-gray); font-size:0.92rem; line-height:1.75; max-width:600px;">
+        Video animado que recorre la evolución histórica de los conceptos de niñez e infancia 
+        a través de la Edad Antigua, Media y Moderna.
+      </p>
+
+      <!-- ══════════════════════════════════════════════
+           AQUÍ VA TU VIDEO
+           Reemplaza el bloque .video-placeholder con tu 
+           <iframe> o <video>. Ejemplos:
+
+           YouTube:
+           <iframe id="video-embed" 
+             src="https://www.youtube.com/embed/TU_ID_AQUI"
+             allowfullscreen></iframe>
+
+           Archivo local / Drive:
+           <video id="video-embed" controls>
+             <source src="tu-video.mp4" type="video/mp4">
+           </video>
+      ════════════════════════════════════════════════ -->
+      <div class="video-frame">
+        <video id="video-embed" controls>
+          <source src="1.mp4" type="video/mp4">
+          Tu navegador no soporta la reproducción de video.
+        </video>
+      </div>
+ 
+    </div>
+  </div>
+
+  <!-- CONCLUSIONES -->
+  <section id="conclusiones" class="reveal">
+    <p class="section-label">Reflexión Final</p>
+    <h2 class="section-title">Conclusiones</h2>
+
+    <div class="conclusion-grid">
+      <div class="conclusion-card">
+        <h3>La infancia como construcción social</h3>
+        <p>
+          A lo largo de la historia, el concepto de infancia no ha sido universal ni estático. 
+          En la Edad Antigua, los niños eran concebidos como adultos en miniatura, sin un 
+          estatuto propio que reconociera su especificidad.
+        </p>
+      </div>
+      <div class="conclusion-card">
+        <h3>La Edad Media y la invisibilización</h3>
+        <p>
+          Durante el Medioevo, la niñez permaneció prácticamente invisible en el imaginario 
+          colectivo. Los niños participaban del mundo adulto desde muy temprana edad, 
+          sin espacios propios de juego, cuidado o formación.
+        </p>
+      </div>
+      <div class="conclusion-card">
+        <h3>La Modernidad y el "descubrimiento"</h3>
+        <p>
+          Es en la Modernidad cuando emerge la noción de infancia tal como la conocemos: 
+          un período singular de desarrollo que requiere protección, educación y cuidado 
+          diferenciado por parte del mundo adulto.
+        </p>
+      </div>
+      <div class="conclusion-card">
+        <h3>Hacia una pedagogía de las infancias</h3>
+        <p>
+          Deconstruir estos conceptos nos invita a reconocer que las infancias son plurales. 
+          No existe una única infancia: existen múltiples infancias atravesadas por contextos 
+          culturales, sociales y económicos diversos.
+        </p>
+      </div>
+    </div>
+
+    <div class="conclusion-full">
+      <p>
+        El estudio de la historia de la niña, el niño, la niñez y la infancia permite comprender como las sociedades han transformado su manera de entender el desarrollo humano en la Edad Antigua y en la Edad Media los niños eran vistos principalmente como futuros adultos que debían asumir responsabilidades desde temprana edad sin que se reconocieran plenamente sus necesidades.
+
+      </p>
+      <p>
+        Sin embargo en la Edad Moderna comenzaron a surgir nuevas ideas sobre la importancia de la infancia y la educación infantil punto estas transformaciones permitieron reconocer que los niños son sujetos con derechos y que requieren cuidado, protección y oportunidades de aprendizaje adecuadas para su desarrollo.
+      </p>
+      <p>
+       Comprender estos cambios históricos es fundamental para la pedagogía infantil ya que permite valorar la importancia de garantizar una educación de calidad el respeto por los derechos de los niños y el reconocimiento de la infancia con una etapa esencial en la formación del ser humano.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    Daniela Fernanda Buelvas Sierra &nbsp;·&nbsp; El Lugar de las Infancias &nbsp;·&nbsp; Pedagogía 2026
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
